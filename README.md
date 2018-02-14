@@ -13,12 +13,13 @@ https://github.com/angular/angular-cli/wiki
 Angular CLI `package.json` dependencies includes:
 
 - `webpack`: Static module bundler for modern JavaScript applications. When webpack processes your application, it recursively builds a dependency graph that includes every module your application needs, then packages all of those modules into one or more bundles.
-- `typescript`: compiles .ts files script to .js.
+- `typescript`: Compiles .ts files script to .js.
 - `html-webpack-plugin`: Webpack **plugin** that simplifies creation of HTML files to serve your webpack bundles.
-- `node-sass`: compile .scss files to css.
+- `node-sass`: Compile .scss files to css.
 - `sass-loader`: Webpack **loader** to load .scss file and compile it to css.
 - ...
 
+More on Angular CLI dependancies:
 https://github.com/angular/angular-cli/blob/master/package.json
 
 More on Webpack:
@@ -26,7 +27,7 @@ More on Webpack:
 - https://webpack.js.org/loaders/
 - https://webpack.js.org/plugins/
 
-## Angular expternal dependencies
+## Angular external dependencies
 
 - core-js
 - zone.js
