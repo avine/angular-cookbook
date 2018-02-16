@@ -51,9 +51,9 @@ try {
   config.apps = config.apps.sort((a, b) => a.name > b.name);
 
   // Update configuration
-  const configString = JSON.stringify(config, undefined, 2);
+  const configString = JSON.stringify(config, undefined, 2) + '\n';
   DEMO_MODE
-    ? console.log(`\n${configString}\n`)
+    ? console.log('\n' + configString)
     : fs.writeFileSync(getPath('.angular-cli.json'), configString, 'utf8');
 
   console.log('Updated file: .angular-cli.json');

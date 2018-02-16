@@ -1,50 +1,86 @@
 # AngularCookbook
 
-I used angular CLI to create a new app with the following arguments:
+This cookbook allows you to create as many app as you want to test Angular recipes.
+
+## History
+
+I used angular cli to create a new app with the following arguments:
 
 ```bash
 ng new angular-cookbook --inline-template --inline-style --style scss
 ```
 
-## Angular CLI
+Then I changed the structure of the project as follows:
 
-https://github.com/angular/angular-cli/wiki
+```bash
+# create new folders `cookbook/_tmpl`
+mkdir -p cookbook/_tmpl
 
-Angular CLI `package.json` dependencies includes:
+# copy `src` content in `cookbook/_tmpl`
+cp -rf src/** cookbook/_tmpl
 
-- `webpack`: Static module bundler for modern JavaScript applications. When webpack processes your application, it recursively builds a dependency graph that includes every module your application needs, then packages all of those modules into one or more bundles.
-- `typescript`: Compiles .ts files script to .js.
-- `html-webpack-plugin`: Webpack **plugin** that simplifies creation of HTML files to serve your webpack bundles.
-- `node-sass`: Compile .scss files to css.
-- `sass-loader`: Webpack **loader** to load .scss file and compile it to css.
-- ...
+# add README to encourage recipe documentation
+touch cookbook/_tmpl/README.md
+echo $'# AngularCookbook\n\nDescribe your recipe...' > cookbook/_tmpl/README.md
+```
 
-More on Angular CLI dependancies:
-https://github.com/angular/angular-cli/blob/master/package.json
+In `cookbook/_tmpl` folder, i updated the following path in `tsconfig.app.json` and `tsconfig.spec.json` files:
 
-More on Webpack:
-- https://webpack.js.org/
-- https://webpack.js.org/loaders/
-- https://webpack.js.org/plugins/
+```txt
+{
+  "extends": "../../tsconfig.json", //<- Update path 
+  ...
+```
 
-## Angular external dependencies
+Finally I added a new `"apps"` entry in `angular-cli.json` file:
 
-- core-js
-- zone.js
+```txt
+{
+  ...
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      ...
+    },
+    { //<- Add entry
+      "name": "_tmpl",
+      "root": "cookbook/_tmpl",
+      "outDir": "dist",
+      ...
+    }
+  ],
+  ...
+}
+```
 
-## Angular boilerplate structure
+## Usage
 
-- src/main.ts (which imports src/app/app.module.ts and src/app/app.component.ts)
-- src/index.html
-- src/styles.scss
+Use the `create-app.js` script to create a new recipe `[APP_NAME]` for this cookbook:
 
-These assets are bundled by Webpack.
+```bash
+node create-app [APP_NAME]
 
-## .angular-cli.json
+# ...or run as node script
+./create-app.js [APP_NAME]`
+```
 
-Contains the list of `apps` definition.
-You can have one or more apps in your project.
+(for the second method to work you'll probably need to change permission: `chmod +x ./create-app.js`).
 
-## Angular testing
+This copies `cookbook/_tmpl` content in a new folder `cookbook/[APP_NAME]`, and adds your new app in `angular-cli.json`.
 
-The basics.
+Launch your app and start cooking:
+
+```bash
+# serve app
+ng serve --app [APP_NAME]
+
+# generate component in `cookbook/[APP_NAME]/app/hello`
+ng g c --app [APP_NAME] hello
+
+# and don't forget to test your recipe (you know, TDD...)
+ng test --app [APP_NAME]
+
+# build app
+ng build --app [APP_NAME] --prod
+```
