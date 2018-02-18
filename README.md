@@ -56,6 +56,8 @@ Finally I added a new `"apps"` entry in `angular-cli.json` file:
 
 ## Usage
 
+### create-app.js
+
 Use the `create-app.js` script to create a new recipe `[APP_NAME]` for this cookbook:
 
 ```bash
@@ -84,3 +86,15 @@ ng test --app [APP_NAME]
 # build app
 ng build --app [APP_NAME] --prod
 ```
+
+### create-wiki.js
+
+Use the `create-wiki.js` script to generate an HTML page `cookbook-wiki.html`.
+
+This file aggregates the `README.md` content of each recipe into a single page.
+
+```bash
+node create-wiki
+```
+
+Next, simply open `cookbook-wiki.html` in your favorite browser.
