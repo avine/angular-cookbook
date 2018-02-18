@@ -39,12 +39,12 @@ try {
   // Clean configuration (when `app.name` has been removed from `APPS_DIR` folder)
   config.apps = config.apps.filter(app => app.root === 'src' || appsList.includes(app.name));
 
-  // Set appName configuration
+  // Set new app configuration
   const appConfig = Object.assign({}, tmplConfig);
   appConfig.name = appName;
   appConfig.root = appRoot;
 
-  // Add appName configuration
+  // Add new app configuration
   config.apps.push(appConfig);
 
   // Order apps by name
