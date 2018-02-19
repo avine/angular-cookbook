@@ -56,18 +56,18 @@ Finally I added a new `"apps"` entry in `angular-cli.json` file:
 
 ## Usage
 
-### create-app.js
+### create/app.js
 
-Use the `create-app.js` script to create a new recipe `[APP_NAME]` for this cookbook:
+Use the `create/app.js` script to create a new recipe `[APP_NAME]` for this cookbook:
 
 ```bash
-node create-app [APP_NAME]
+node create/app [APP_NAME]
 
 # ...or run as node script
-./create-app.js [APP_NAME]`
+./create/app.js [APP_NAME]`
 ```
 
-(for the second method to work you'll probably need to change permission: `chmod +x ./create-app.js`).
+(for the second method to work you'll probably need to change permission: `chmod +x ./create/app.js`).
 
 This copies `cookbook/_tmpl` content in a new folder `cookbook/[APP_NAME]`, and adds your new app in `angular-cli.json`.
 
@@ -87,14 +87,14 @@ ng test --app [APP_NAME]
 ng build --app [APP_NAME] --prod
 ```
 
-### create-wiki.js
+### create/wiki.js
 
-Use the `create-wiki.js` script to generate an HTML page `cookbook-wiki.html`.
+Use the `create/wiki.js` script to generate an HTML page `dist/index.html`.
 
-This file aggregates the `README.md` content of each recipe into a single page.
+This page aggregates the `README.md` content of each recipe into a single place.
 
 ```bash
-node create-wiki
+node create/wiki
 ```
 
-Next, simply open `cookbook-wiki.html` in your favorite browser.
+Next, simply open `dist/wiki.html` in your favorite browser.
