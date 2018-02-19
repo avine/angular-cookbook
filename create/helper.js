@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 
-const RELATIVE_PATH_TO_ROOT = '../';
+const config = require('./config');
 
 // Exit with std error message
 function exit(msg) {
@@ -11,7 +11,7 @@ function exit(msg) {
 
 // Resolve path relative to project root
 function getPath(relativePath) {
-  return path.resolve(__dirname, RELATIVE_PATH_TO_ROOT, relativePath);
+  return path.resolve(__dirname, config.RELATIVE_PATH_TO_ROOT, relativePath);
 }
 
 // Return ordered list of directories
