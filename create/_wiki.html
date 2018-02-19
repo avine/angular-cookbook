@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="github-markdown.css">
   <style>
+    /* Default markdown */
     .markdown-body {
       box-sizing: border-box;
       min-width: 200px;
@@ -19,10 +20,25 @@
         padding: 15px;
       }
     }
+    /* Customized header */
+    #header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem;
+      font-size: 2rem;
+      line-height: 1em;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+    .markdown-body {
+      padding-top: 6rem; /* Put content below header */
+    }
   </style>
 </head>
 <body class="markdown-body">
-<h1 style="text-align:center;">Cookbook wiki</h1>
+  <h1 id="header">Cookbook wiki</h1>
 
 {{content}}
 </body>
