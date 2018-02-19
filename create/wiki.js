@@ -18,17 +18,20 @@ appsList.forEach(appName => {
   const appRoot = `${config.APPS_DIR}/${appName}`;
   try {
     // Get `README.md` content of each app recipe
-    const readme = fs.readFileSync(helper.getPath(`${appRoot}/README.md`), 'utf8');
-    readmeList.push(readme);
-    console.log(`Included wiki: ${appRoot}`);
+    let readme = fs.readFileSync(helper.getPath(`${appRoot}/README.md`), 'utf8');
 
-    // Generate link to first header of the recipe
+    // Generate markdown link to the first header of the recipe
     const header = getHeader(readme);
     if (header) {
-      linkList.push(`- [${header} ( ${appName} )](#${headerToAnchor(header)})`);
+      const text = header !== appName ? `${header} ( ${appName} )` : header;
+      linkList.push(`- [${text}](#${headerToAnchor(header)})`);
     } else {
-      // TODO: do something...
+      linkList.push(`- [${appName}](#${headerToAnchor(appName)})`);
+      readme = `# ${appName}\n\n${readme}`;
     }
+    readmeList.push(readme);
+
+    console.log(`Included wiki: ${appRoot}`);
   } catch(e) {
     console.log(`Not available wiki: ${appRoot}`);
   }
