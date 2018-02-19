@@ -89,7 +89,7 @@ ng build --app [APP_NAME] --prod
 
 ### create/wiki.js
 
-Use the `create/wiki.js` script to generate an HTML page `dist/index.html`.
+Use the `create/wiki.js` script to generate an HTML page in `dist/index.html`.
 
 This page aggregates the `README.md` content of each recipe into a single place.
 
@@ -97,4 +97,4 @@ This page aggregates the `README.md` content of each recipe into a single place.
 node create/wiki
 ```
 
-Next, simply open `dist/wiki.html` in your favorite browser.
+Next, simply open `dist/index.html` in your favorite browser.
