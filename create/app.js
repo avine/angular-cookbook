@@ -29,6 +29,10 @@ const appRoot = `${config.APPS_DIR}/${appName}`;
 config.DEMO_MODE || fs.copySync(helper.getPath(`${config.APPS_DIR}/_tmpl`), helper.getPath(appRoot));
 console.log(`Created folder: ${appRoot}`);
 
+// Add `README.md``
+const readme = `# ${appName}\n\nDescribe your recipe...`;
+config.DEMO_MODE || fs.writeFileSync(helper.getPath(helper.getPath(`${appRoot}/README.md`)), readme, 'utf8');
+
 // Get `_tmpl` app configuration
 const cliConfig = JSON.parse(fs.readFileSync(helper.getPath('.angular-cli.json'), 'utf8'));
 const tmplConfig = cliConfig.apps.filter(app => app.name === '_tmpl')[0];

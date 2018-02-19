@@ -4,7 +4,7 @@ This cookbook allows you to create as many app as you want to test Angular recip
 
 ## History
 
-I used angular cli to create a new app with the following arguments:
+I used angular CLI to create a new app with the following arguments:
 
 ```bash
 ng new angular-cookbook --inline-template --inline-style --style scss
@@ -18,13 +18,9 @@ mkdir -p cookbook/_tmpl
 
 # copy `src` content in `cookbook/_tmpl`
 cp -rf src/** cookbook/_tmpl
-
-# add README to encourage recipe documentation
-touch cookbook/_tmpl/README.md
-echo $'# AngularCookbook\n\nDescribe your recipe...' > cookbook/_tmpl/README.md
 ```
 
-In `cookbook/_tmpl` folder, i updated the following path in `tsconfig.app.json` and `tsconfig.spec.json` files:
+In `cookbook/_tmpl` folder, I updated the following path in `tsconfig.app.json` and `tsconfig.spec.json` files:
 
 ```txt
 {
@@ -43,9 +39,9 @@ Finally I added a new `"apps"` entry in `angular-cli.json` file:
       "outDir": "dist",
       ...
     },
-    { //<- Add entry
-      "name": "_tmpl",
-      "root": "cookbook/_tmpl",
+    { //<- New apps entry
+      "name": "_tmpl", //<- Add app name
+      "root": "cookbook/_tmpl", //<- Set app root
       "outDir": "dist",
       ...
     }
@@ -69,9 +65,11 @@ node create/app [APP_NAME]
 
 (for the second method to work you'll probably need to change permission: `chmod +x ./create/app.js`).
 
-This copies `cookbook/_tmpl` content in a new folder `cookbook/[APP_NAME]`, and adds your new app in `angular-cli.json`.
+The script copies `cookbook/_tmpl` content in a new folder `cookbook/[APP_NAME]`,
+adds a `README.md` to encourage the recipe documentation,
+and references the new app in `angular-cli.json`.
 
-Launch your app and start cooking:
+Now, launch your app and start cooking:
 
 ```bash
 # serve app
@@ -89,12 +87,12 @@ ng build --app [APP_NAME] --prod
 
 ### create/wiki.js
 
-Use the `create/wiki.js` script to generate an HTML page in `dist/index.html`.
+Use the `create/wiki.js` script to generate a single documentation for all your receipes.
 
-This page aggregates the `README.md` content of each recipe into a single place.
+It create an HTML page in `dist/index.html` that aggregates the `README.md` content of each recipe into a single place.
 
 ```bash
 node create/wiki
 ```
 
-Next, simply open `dist/index.html` in your favorite browser.
+Now, simply open `dist/index.html` in your favorite browser.

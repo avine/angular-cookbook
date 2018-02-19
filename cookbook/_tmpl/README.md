@@ -1,3 +1,0 @@
-# AngularCookbook
-
-Describe your recipe...
