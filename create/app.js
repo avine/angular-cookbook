@@ -13,11 +13,11 @@ appName || helper.exit('argument appName is missing.');
 
 appName = appName.toLowerCase();
 
-// List directories
+// Available directories in `config.APPS_DIR`
 const appsList = helper.getDirsList(helper.getPath(config.APPS_DIR));
 
 // Template app mandatory
-appsList.includes('_tmpl') || helper.exit('template app "_tmpl" is missing.');
+appsList.includes(config.TMPL_APP_NAME) || helper.exit(`template app "${config.TMPL_APP_NAME}" is missing.`);
 
 // New app name mandatory
 !appsList.includes(appName) || helper.exit(`app "${appName}" already exists.`);
@@ -25,33 +25,33 @@ appsList.includes('_tmpl') || helper.exit('template app "_tmpl" is missing.');
 // New app root folder
 const appRoot = `${config.APPS_DIR}/${appName}`;
 
-// Duplicate `_tmpl` app folder
-config.DEMO_MODE || fs.copySync(helper.getPath(`${config.APPS_DIR}/_tmpl`), helper.getPath(appRoot));
+// Duplicate `config.TMPL_APP_NAME` app folder
+config.DEMO_MODE || fs.copySync(helper.getPath(`${config.APPS_DIR}/${config.TMPL_APP_NAME}`), helper.getPath(appRoot));
 console.log(`Created folder: ${appRoot}`);
 
 // Add `README.md`
 const readme = `# ${appName}\n\nDescribe your recipe...`;
-config.DEMO_MODE || fs.writeFileSync(helper.getPath(helper.getPath(`${appRoot}/README.md`)), readme, 'utf8');
+config.DEMO_MODE || fs.writeFileSync(helper.getPath(`${appRoot}/README.md`), readme, 'utf8');
 
-// Get `_tmpl` app configuration
+// Get Angular CLI config file and its `config.TMPL_APP_NAME` app configuration
 const cliConfig = JSON.parse(fs.readFileSync(helper.getPath('.angular-cli.json'), 'utf8'));
-const tmplConfig = cliConfig.apps.filter(app => app.name === '_tmpl')[0];
+const tmplConfig = cliConfig.apps.filter(app => app.name === config.TMPL_APP_NAME)[0];
 
-// Clean configuration (when `app.name` has been removed from `config.APPS_DIR` folder)
+// Clean configuration (when `app.name` has been removed from appsList)
 cliConfig.apps = cliConfig.apps.filter(app => app.root === 'src' || appsList.includes(app.name));
 
-// Set new app configuration
+// Duplicate `config.TMPL_APP_NAME` app configuration and set new app configuration
 const appConfig = Object.assign({}, tmplConfig);
 appConfig.name = appName;
 appConfig.root = appRoot;
 
-// Add new app configuration
+// Add new app configuration to Angular CLI config
 cliConfig.apps.push(appConfig);
 
 // Order apps by name
 cliConfig.apps.sort((a, b) => a.name > b.name);
 
-// Update configuration
+// Update Angular CLI configuration
 const cliConfigString = JSON.stringify(cliConfig, undefined, 2) + '\n';
 config.DEMO_MODE
   ? console.log('\n' + cliConfigString)
